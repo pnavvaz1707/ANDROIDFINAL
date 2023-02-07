@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ANDROIDFINAL</string>
+    <string name="btn_clientes_txt">Clientes</string>
+    <string name="btn_pedidos_txt">Pedidos</string>
+    <string name="btn_crear_txt">Crear</string>
+    <string name="btn_borrar_txt">Borrar</string>
+    <string name="btn_modificar_txt">Modificar</string>
+    <string name="btn_listar_txt">Listar</string>
+</resources>
