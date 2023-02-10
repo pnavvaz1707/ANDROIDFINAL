@@ -1,5 +1,6 @@
 package com.example.androidfinal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,7 +47,7 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         if (v.getId() == btnCrear.getId()) {
-
+            startActivity(new Intent(this,CrearClienteActivity.class));
         } else if (v.getId() == btnModificar.getId()) {
 
         } else if (v.getId() == btnEliminar.getId()) {

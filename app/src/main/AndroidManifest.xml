@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".ClientesActivity" />
         <activity android:name=".PedidosActivity" />
+        <activity android:name=".CrearClienteActivity" />
     </application>
 
 </manifest>
