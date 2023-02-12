@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TableLayout
+        android:id="@+id/tbClientes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp"/>
+
+    <!--
+    https://www.youtube.com/playlist?list=PL4Qls_AA7vWKw8MET201lWJ1sNs5KCMMO
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -31,7 +40,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="@string/btn_modificar_txt" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="wrap_content"

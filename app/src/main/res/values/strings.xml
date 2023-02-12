@@ -5,7 +5,7 @@
     <string name="btn_crear_txt">Crear</string>
     <string name="btn_borrar_txt">Borrar</string>
     <string name="btn_modificar_txt">Modificar</string>
-    <string name="btn_listar_txt">Listar</string>
+    <string name="btn_listar_txt">Listar pedidos</string>
     <string name="btn_cancelar_txt">Cancelar</string>
     <string name="txt_ubicacion">Ubicación:</string>
     <string name="txt_telefono">Teléfono:</string>
