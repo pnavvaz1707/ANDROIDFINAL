@@ -1,20 +1,16 @@
 package com.example.androidfinal;
 
-import java.util.ArrayList;
-
 public class Cliente {
     private int id;
     private String nombre;
     private String telefono;
     private String ubicacion;
-    private ArrayList<Pedido> pedidos;
 
-    public Cliente(int id, String nombre, String telefono, String ubicacion, ArrayList<Pedido> pedidos) {
+    public Cliente(int id, String nombre, String telefono, String ubicacion) {
         this.id = id;
         this.nombre = nombre;
         this.telefono = telefono;
         this.ubicacion = ubicacion;
-        this.pedidos = pedidos;
     }
 
     public int getId() {
@@ -47,13 +43,5 @@ public class Cliente {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
-    }
-
-    public ArrayList<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(ArrayList<Pedido> pedidos) {
-        this.pedidos = pedidos;
     }
 }
