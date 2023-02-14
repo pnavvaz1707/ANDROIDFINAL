@@ -7,12 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,9 +18,8 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
 
     private Button btnCrear;
     private Button btnEliminar;
-    private Button btnListarPedidos;
+    private Button btnActualizar;
     private ListView lstClientes;
-    public BaseDeDatos baseDeDatos;
     public static SQLiteDatabase db;
 
     @Override
@@ -33,20 +27,21 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clientes_window);
 
-        baseDeDatos = new BaseDeDatos(this, "BDPizzeria", null, 2);
+        BaseDeDatos baseDeDatos = new BaseDeDatos(this, "BDPizzeria", null, 2);
         db = baseDeDatos.getWritableDatabase();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         lstClientes = (ListView) findViewById(R.id.lstClientes);
+
         btnCrear = (Button) findViewById(R.id.btnCrearCliente);
         btnEliminar = (Button) findViewById(R.id.btnEliminarCliente);
-        btnListarPedidos = (Button) findViewById(R.id.btnListarCliente);
+        btnActualizar = (Button) findViewById(R.id.btnActualizarClientes);
 
         btnCrear.setOnClickListener(this);
         btnEliminar.setOnClickListener(this);
-        btnListarPedidos.setOnClickListener(this);
+        btnActualizar.setOnClickListener(this);
     }
 
     @Override
@@ -67,7 +62,7 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
         } else if (v.getId() == btnEliminar.getId()) {
 
 
-        } else if (v.getId() == btnListarPedidos.getId()) {
+        } else if (v.getId() == btnActualizar.getId()) {
             Cursor c1 = db.rawQuery("SELECT * FROM " + BaseDeDatos.CLIENTES_TABLA, null);
 
             if (c1.moveToFirst()) {
@@ -76,14 +71,17 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
                     System.out.println("----> " + c1.getInt(0) + " " + c1.getString(1) + " " + c1.getString(2) + " " + c1.getString(3));
                     System.out.println("/////////////////////////");
                 } while (c1.moveToNext());
+            } else {
+                System.out.println("No hay nada");
             }
 
             String[] nombresColumnas = new String[]{BaseDeDatos.CLIENTE_ID, BaseDeDatos.NOMBRE, BaseDeDatos.TELEFONO, BaseDeDatos.UBICACION};
             int[] referencias = new int[]{R.id.tvId, R.id.tvNombre, R.id.tvTel, R.id.tvUbicacion};
 
-            SimpleCursorAdapter simpleCursorAdapter = new SimpleCursorAdapter(this, R.layout.list_clientes, c1, nombresColumnas, referencias, 0);
-            lstClientes.setAdapter(simpleCursorAdapter);
+            CustomAdaptadorClientes customAdaptadorClientes = new CustomAdaptadorClientes(this, R.layout.list_clientes, c1, nombresColumnas, referencias, 0);
+            lstClientes.setAdapter(customAdaptadorClientes);
 
+        } else {
 
         }
     }

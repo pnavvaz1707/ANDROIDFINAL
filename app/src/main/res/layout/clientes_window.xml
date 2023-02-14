@@ -18,75 +18,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="id"
+                android:text="ID"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="nombre"
+                android:text="Nombre"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="telefono"
+                android:text="Telefono"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
-                android:text="ubicacion"
+                android:text="Ubicacion"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <ListView
             android:id="@+id/lstClientes"
             android:layout_width="match_parent"
-            android:layout_height="570dp" />
+            android:layout_height="600dp" />
     </LinearLayout>
-
-    <GridLayout
-        android:id="@+id/tbClientes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:columnCount="4"
-        android:orientation="vertical" />
-
-    <!--
-    https://www.youtube.com/playlist?list=PL4Qls_AA7vWKw8MET201lWJ1sNs5KCMMO
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btnCrearCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:text="@string/btn_crear_txt" />
-
-        <Button
-            android:id="@+id/btnEliminarCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:text="@string/btn_borrar_txt" />
-
-        <Button
-            android:id="@+id/btnModificarCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:text="@string/btn_modificar_txt" />
-    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -115,10 +76,10 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/btnListarCliente"
+            android:id="@+id/btnActualizarClientes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/btn_listar_txt" />
+            android:text="@string/btn_actualizar_txt" />
     </LinearLayout>
 </LinearLayout>

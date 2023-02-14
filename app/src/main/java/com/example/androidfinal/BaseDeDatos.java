@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BaseDeDatos extends SQLiteOpenHelper {
 
-    //Sentencia SQL para crear la tabla de Actividades
     public static final String CLIENTES_TABLA = "Clientes";
     public static final String CLIENTE_ID = "_id";
     public static final String NOMBRE = "nombre";
@@ -17,6 +16,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     public static final String PEDIDOS_TABLA = "Pedidos";
     public static final String PEDIDO_ID = "_id";
     public static final String PIZZA = "pizza";
+    public static final String CANTIDAD = "cantidad";
     public static final String PRECIO = "precio";
     public static final String PEDIDOS_CLIENTE_ID = "cliente_id";
 
@@ -27,16 +27,17 @@ public class BaseDeDatos extends SQLiteOpenHelper {
             + TELEFONO + " TEXT NOT NULL, "
             + UBICACION + " TEXT NOT NULL);";
 
-    private static final String CLIENTES_TABLA_BORRAR = "DROP TABLE IF EXISTS " + CLIENTES_TABLA;
-    private static final String PEDIDOS_TABLA_BORRAR = "DROP TABLE IF EXISTS " + PEDIDOS_TABLA;
-
     private static final String PEDIDOS_TABLA_CREAR = "CREATE TABLE "
             + PEDIDOS_TABLA + " ("
             + PEDIDO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + PIZZA + " TEXT NOT NULL, "
+            + CANTIDAD + " INTEGER NOT NULL, "
             + PRECIO + " REAL NOT NULL, "
             + PEDIDOS_CLIENTE_ID + " INTEGER,"
             + " FOREIGN KEY (" + PEDIDOS_CLIENTE_ID + ") REFERENCES " + CLIENTES_TABLA + "(" + CLIENTE_ID + "));";
+
+    private static final String CLIENTES_TABLA_BORRAR = "DROP TABLE IF EXISTS " + CLIENTES_TABLA;
+    private static final String PEDIDOS_TABLA_BORRAR = "DROP TABLE IF EXISTS " + PEDIDOS_TABLA;
 
     // Constructor de la clase. Podr�amos eliminar los par�metros
     // menos el contexto

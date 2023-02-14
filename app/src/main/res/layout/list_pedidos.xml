@@ -11,44 +11,34 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tvId"
+            android:id="@+id/tvIdPedidoCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:maxWidth="15dp" />
 
         <TextView
-            android:id="@+id/tvNombre"
+            android:id="@+id/tvNombrePizza"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_weight="1"
-            android:maxWidth="30dp" />
+            android:maxWidth="60dp" />
 
         <TextView
-            android:id="@+id/tvTel"
+            android:id="@+id/tvCantidadPizza"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:maxWidth="30dp" />
 
         <TextView
-            android:id="@+id/tvUbicacion"
+            android:id="@+id/tvPrecioPizza"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="1.5"
-            android:maxWidth="70dp" />
-
-        <ImageButton
-            android:id="@+id/btnVerPedidos"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_menu_view"
-            android:contentDescription="@string/ver_pedido_txt" />
-
+            android:maxWidth="40dp" />
     </LinearLayout>
 </LinearLayout>

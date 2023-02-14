@@ -24,6 +24,7 @@
         <activity android:name=".ClientesActivity" />
         <activity android:name=".PedidosActivity" />
         <activity android:name=".CrearClienteActivity" />
+        <activity android:name=".CrearPedidoActivity"/>
     </application>
 
 </manifest>

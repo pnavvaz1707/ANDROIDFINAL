@@ -10,4 +10,6 @@
     <string name="txt_ubicacion">Ubicación:</string>
     <string name="txt_telefono">Teléfono:</string>
     <string name="txt_nombre">Nombre:</string>
+    <string name="btn_actualizar_txt">Actualizar</string>
+    <string name="ver_pedido_txt">Ver pedido</string>
 </resources>

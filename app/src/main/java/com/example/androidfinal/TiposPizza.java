@@ -14,4 +14,9 @@ public enum TiposPizza {
     public double getPrecio() {
         return PRECIO;
     }
+
+    @Override
+    public String toString() {
+        return name();
+    }
 }
