@@ -49,6 +49,14 @@
             android:background="@android:color/transparent"
             android:src="@android:drawable/ic_menu_view"
             android:contentDescription="@string/ver_pedido_txt" />
+        <ImageButton
+            android:id="@+id/btnEliminarCliente"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_delete"
+            android:contentDescription="@string/btn_borrar_txt" />
 
     </LinearLayout>
 </LinearLayout>

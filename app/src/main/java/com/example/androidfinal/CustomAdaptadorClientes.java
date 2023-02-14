@@ -9,10 +9,12 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CustomAdaptadorClientes extends SimpleCursorAdapter implements View.OnClickListener {
     private Context contexto;
     private ImageButton btnVerPedidos;
+    private ImageButton btnEliminarCliente;
     private TextView tvId;
     private TextView tvNombre;
     private TextView tvTel;
@@ -31,26 +33,39 @@ public class CustomAdaptadorClientes extends SimpleCursorAdapter implements View
         tvTel = (TextView) view.findViewById(R.id.tvTel);
 
         btnVerPedidos = (ImageButton) view.findViewById(R.id.btnVerPedidos);
+        btnEliminarCliente = (ImageButton) view.findViewById(R.id.btnEliminarCliente);
+
         btnVerPedidos.setOnClickListener(this);
+        btnEliminarCliente.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void onClick(View view) {
-        Dialog dialog = new Dialog(contexto);
-        dialog.setContentView(R.layout.pedidos_cliente);
-        dialog.setTitle("Pedidos del cliente " + tvNombre.getText().toString());
+        if (view.getId() == btnEliminarCliente.getId()) {
+            if (ClientesActivity.db.delete(BaseDeDatos.CLIENTES_TABLA, BaseDeDatos.CLIENTE_ID + " = '" + tvId.getText().toString() + "'", null) > 0) {
+                Toast.makeText(contexto, "Se ha eliminado el cliente " + tvNombre.getText().toString(), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(contexto, "No se ha eliminado el cliente " + tvNombre.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
 
-        ListView lstPedidos = (ListView) dialog.findViewById(R.id.lstPedidosCliente);
+        } else {
+            Dialog dialog = new Dialog(contexto);
+            dialog.setContentView(R.layout.pedidos_cliente);
+            dialog.setTitle("Pedidos del cliente " + tvNombre.getText().toString());
+            System.out.println("Pedidos del cliente " + tvNombre.getText().toString());
 
-        Cursor pedidosCliente = ClientesActivity.db.rawQuery("SELECT * FROM " + BaseDeDatos.PEDIDOS_TABLA + " WHERE " + BaseDeDatos.PEDIDOS_CLIENTE_ID + " = " + tvId.getText().toString(), null);
+            ListView lstPedidos = (ListView) dialog.findViewById(R.id.lstPedidosCliente);
 
-        String[] nombresColumnas = new String[]{BaseDeDatos.PEDIDO_ID, BaseDeDatos.PIZZA, BaseDeDatos.PIZZA, BaseDeDatos.PRECIO};
-        int[] referencias = new int[]{R.id.tvIdPedidoCliente, R.id.tvNombrePizza, R.id.tvCantidadPizza, R.id.tvPrecioPizza};
+            Cursor pedidosCliente = ClientesActivity.db.rawQuery("SELECT * FROM " + BaseDeDatos.PEDIDOS_TABLA + " WHERE " + BaseDeDatos.PEDIDOS_CLIENTE_ID + " = " + tvId.getText().toString(), null);
 
-        CustomAdaptadorPedidos adaptador = new CustomAdaptadorPedidos(contexto, R.layout.list_pedidos, pedidosCliente, nombresColumnas, referencias, 0);
-        lstPedidos.setAdapter(adaptador);
-        dialog.show();
+            String[] nombresColumnas = new String[]{BaseDeDatos.PEDIDO_ID, BaseDeDatos.PIZZA, BaseDeDatos.PIZZA, BaseDeDatos.PRECIO};
+            int[] referencias = new int[]{R.id.tvIdPedidoCliente, R.id.tvNombrePizza, R.id.tvCantidadPizza, R.id.tvPrecioPizza};
+
+            CustomAdaptadorPedidos adaptador = new CustomAdaptadorPedidos(contexto, R.layout.list_pedidos, pedidosCliente, nombresColumnas, referencias, 0);
+            lstPedidos.setAdapter(adaptador);
+            dialog.show();
+        }
 
     }
 }

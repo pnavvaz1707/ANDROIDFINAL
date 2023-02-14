@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class ClientesActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button btnCrear;
-    private Button btnEliminar;
     private Button btnActualizar;
     private ListView lstClientes;
     public static SQLiteDatabase db;
@@ -36,11 +35,9 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
         lstClientes = (ListView) findViewById(R.id.lstClientes);
 
         btnCrear = (Button) findViewById(R.id.btnCrearCliente);
-        btnEliminar = (Button) findViewById(R.id.btnEliminarCliente);
         btnActualizar = (Button) findViewById(R.id.btnActualizarClientes);
 
         btnCrear.setOnClickListener(this);
-        btnEliminar.setOnClickListener(this);
         btnActualizar.setOnClickListener(this);
     }
 
@@ -58,9 +55,6 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         if (v.getId() == btnCrear.getId()) {
             startActivity(new Intent(this, CrearClienteActivity.class));
-
-        } else if (v.getId() == btnEliminar.getId()) {
-
 
         } else if (v.getId() == btnActualizar.getId()) {
             Cursor c1 = db.rawQuery("SELECT * FROM " + BaseDeDatos.CLIENTES_TABLA, null);
@@ -80,8 +74,6 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
 
             CustomAdaptadorClientes customAdaptadorClientes = new CustomAdaptadorClientes(this, R.layout.list_clientes, c1, nombresColumnas, referencias, 0);
             lstClientes.setAdapter(customAdaptadorClientes);
-
-        } else {
 
         }
     }

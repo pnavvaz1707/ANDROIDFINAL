@@ -55,20 +55,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnCrearCliente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:text="@string/btn_crear_txt" />
-
-        <Button
-            android:id="@+id/btnEliminarCliente"
+            android:id="@+id/btnActualizarClientes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="@string/btn_borrar_txt" />
-
+            android:text="@string/btn_actualizar_txt" />
 
         <Space
             android:layout_width="0dp"
@@ -76,10 +67,12 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/btnActualizarClientes"
+            android:id="@+id/btnCrearCliente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/btn_actualizar_txt" />
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/btn_crear_txt" />
+
     </LinearLayout>
 </LinearLayout>
