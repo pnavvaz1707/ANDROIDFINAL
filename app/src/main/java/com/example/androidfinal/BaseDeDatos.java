@@ -18,6 +18,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     public static final String PIZZA = "pizza";
     public static final String CANTIDAD = "cantidad";
     public static final String PRECIO = "precio";
+    public static final String ENTREGADA = "entregada";
     public static final String PEDIDOS_CLIENTE_ID = "cliente_id";
 
     private static final String CLIENTES_TABLA_CREAR = "CREATE TABLE "
@@ -33,6 +34,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
             + PIZZA + " TEXT NOT NULL, "
             + CANTIDAD + " INTEGER NOT NULL, "
             + PRECIO + " REAL NOT NULL, "
+            + ENTREGADA + " INTEGER NOT NULL, "
             + PEDIDOS_CLIENTE_ID + " INTEGER,"
             + " FOREIGN KEY (" + PEDIDOS_CLIENTE_ID + ") REFERENCES " + CLIENTES_TABLA + "(" + CLIENTE_ID + "));";
 

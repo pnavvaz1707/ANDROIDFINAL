@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_nombre" />
+                android:text="@string/id_del_cliente_txt" />
 
             <EditText
                 android:id="@+id/etIdClientePedido"
@@ -37,7 +37,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pizza: " />
+            android:text="@string/pizza_txt" />
 
         <Spinner
             android:id="@+id/spinnerPizzas"
@@ -53,7 +53,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cantidad: " />
+            android:text="@string/cantidad_txt" />
 
         <EditText
             android:id="@+id/etCantidadPizza"
@@ -73,14 +73,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/btnCrearClienteCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="10dp"
-            android:text="@string/btn_cancelar_txt" />
-
-        <Button
-            android:id="@+id/btnCrearClienteOk"
+            android:id="@+id/btnCrearPedidoOk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/btn_crear_txt" />

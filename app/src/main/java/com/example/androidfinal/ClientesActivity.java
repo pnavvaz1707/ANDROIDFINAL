@@ -1,13 +1,16 @@
 package com.example.androidfinal;
 
+import static com.example.androidfinal.InicioActivity.db;
+
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,16 +21,14 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
 
     private Button btnCrear;
     private Button btnActualizar;
+    private Button btnFiltrar;
+    private EditText etFiltrarTel;
     private ListView lstClientes;
-    public static SQLiteDatabase db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clientes_window);
-
-        BaseDeDatos baseDeDatos = new BaseDeDatos(this, "BDPizzeria", null, 2);
-        db = baseDeDatos.getWritableDatabase();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -36,9 +37,14 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
 
         btnCrear = (Button) findViewById(R.id.btnCrearCliente);
         btnActualizar = (Button) findViewById(R.id.btnActualizarClientes);
+        btnFiltrar = (Button) findViewById(R.id.btnFiltrarCliente);
+        etFiltrarTel = (EditText) findViewById(R.id.etFiltrarTel);
 
         btnCrear.setOnClickListener(this);
         btnActualizar.setOnClickListener(this);
+        btnFiltrar.setOnClickListener(this);
+
+        mostrarDatos("SELECT * FROM " + BaseDeDatos.CLIENTES_TABLA);
     }
 
     @Override
@@ -57,24 +63,29 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
             startActivity(new Intent(this, CrearClienteActivity.class));
 
         } else if (v.getId() == btnActualizar.getId()) {
-            Cursor c1 = db.rawQuery("SELECT * FROM " + BaseDeDatos.CLIENTES_TABLA, null);
+            mostrarDatos("SELECT * FROM " + BaseDeDatos.CLIENTES_TABLA);
+            Toast.makeText(this, getString(R.string.lista_clientes_actualizada), Toast.LENGTH_SHORT).show();
 
-            if (c1.moveToFirst()) {
-                //Recorremos el cursor hasta que no haya m�s registros
-                do {
-                    System.out.println("----> " + c1.getInt(0) + " " + c1.getString(1) + " " + c1.getString(2) + " " + c1.getString(3));
-                    System.out.println("/////////////////////////");
-                } while (c1.moveToNext());
+        } else if (v.getId() == btnFiltrar.getId()) {
+            if (etFiltrarTel.getText().toString().length() == 9 && !etFiltrarTel.getText().toString().isEmpty()) {
+
+                mostrarDatos("SELECT * FROM " + BaseDeDatos.CLIENTES_TABLA + " WHERE " + BaseDeDatos.TELEFONO + " = " + etFiltrarTel.getText().toString());
+                Toast.makeText(this, getString(R.string.filtrar_telefono, etFiltrarTel.getText().toString()), Toast.LENGTH_SHORT).show();
             } else {
-                System.out.println("No hay nada");
+                Toast.makeText(this, getString(R.string.error_telefono), Toast.LENGTH_SHORT).show();
+
             }
-
-            String[] nombresColumnas = new String[]{BaseDeDatos.CLIENTE_ID, BaseDeDatos.NOMBRE, BaseDeDatos.TELEFONO, BaseDeDatos.UBICACION};
-            int[] referencias = new int[]{R.id.tvId, R.id.tvNombre, R.id.tvTel, R.id.tvUbicacion};
-
-            CustomAdaptadorClientes customAdaptadorClientes = new CustomAdaptadorClientes(this, R.layout.list_clientes, c1, nombresColumnas, referencias, 0);
-            lstClientes.setAdapter(customAdaptadorClientes);
-
         }
+    }
+
+    private void mostrarDatos(String sentencia) {
+        Cursor c1 = db.rawQuery(sentencia, null);
+
+        String[] nombresColumnas = new String[]{BaseDeDatos.CLIENTE_ID, BaseDeDatos.NOMBRE, BaseDeDatos.TELEFONO, BaseDeDatos.UBICACION};
+        int[] referencias = new int[]{R.id.tvId, R.id.tvNombre, R.id.tvTel, R.id.tvUbicacion};
+
+        CustomAdaptadorClientes customAdaptadorClientes = new CustomAdaptadorClientes(this, R.layout.list_clientes, c1, nombresColumnas, referencias, 0);
+        lstClientes.setAdapter(customAdaptadorClientes);
+
     }
 }

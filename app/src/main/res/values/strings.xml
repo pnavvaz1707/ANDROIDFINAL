@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ANDROIDFINAL</string>
+    <string name="app_name" translatable="false">ANDROIDFINAL</string>
     <string name="btn_clientes_txt">Clientes</string>
     <string name="btn_pedidos_txt">Pedidos</string>
     <string name="btn_crear_txt">Crear</string>
@@ -12,4 +12,40 @@
     <string name="txt_nombre">Nombre:</string>
     <string name="btn_actualizar_txt">Actualizar</string>
     <string name="ver_pedido_txt">Ver pedido</string>
+    <string name="nombre_bd" translatable="false">BDPizzeria</string>
+    <string name="pedido_eliminado">Se ha eliminado el pedido %1$s</string>
+    <string name="pedido_no_eliminado">No se ha eliminado el pedido %1$s</string>
+    <string name="cliente_eliminado">Se ha eliminado el cliente %1$s</string>
+    <string name="cliente_no_eliminado">No se ha eliminado el cliente %1$s</string>
+    <string name="pedidos_cliente">Pedidos del cliente %1$s</string>
+    <string name="total_precio">Total gastado por %1$s : %2$s €</string>
+    <string name="btn_filtrar_txt">Filtrar</string>
+    <string name="error_telefono">El teléfono debe tener 9 dígitos</string>
+    <string name="cliente_no_existe">El id del cliente ingresado no existe</string>
+    <string name="error_campos_vacio">Debe rellenar todos los campos</string>
+    <string name="error_0_pizzas">Debe encargar al menos una pizza</string>
+    <string name="filtrar_telefono">Clientes filtrados por el teléfono %1$s</string>
+    <string name="cliente_creado">Cliente %1$s creado</string>
+    <string name="pedido_creado">Pedido de %1$s encargado</string>
+    <string name="lista_clientes_actualizada">Lista de clientes actualizada</string>
+    <string name="lista_pedidos_actualizada">Lista de pedidos actualizada</string>
+    <string name="cabecera_id_txt" translatable="false">ID</string>
+    <string name="cabecera_nombre_txt">Nombre</string>
+    <string name="cabecera_telefono_txt">Teléfono</string>
+    <string name="cabecera_ubicacion_txt">Ubicación</string>
+    <string name="id_del_cliente_txt">Id del cliente:</string>
+    <string name="pizza_txt" translatable="false">Pizza:</string>
+    <string name="cantidad_txt">Cantidad:</string>
+    <string name="cabecera_pizza_txt" translatable="false">Pizza</string>
+    <string name="cabecera_cantidad_txt">Cantidad</string>
+    <string name="cabecera_precio_txt">Precio</string>
+    <string name="cabecera_entregada_txt">Entregada</string>
+    <string-array name="pizzas">
+        <item>Carbonara</item>
+        <item>Prosciutto</item>
+        <item>Barbacoa</item>
+        <item>Pepperoni</item>
+        <item>Champiñones</item>
+        <item>Margarita</item>
+    </string-array>
 </resources>

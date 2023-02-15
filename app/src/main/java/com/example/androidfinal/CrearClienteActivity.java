@@ -1,12 +1,15 @@
 package com.example.androidfinal;
 
+import static com.example.androidfinal.InicioActivity.db;
+
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,11 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CrearClienteActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private SQLiteDatabase db;
     private EditText etNombre;
     private EditText etTelefono;
     private EditText etUbicacion;
-    private Button btnCancelar;
     private Button btnCrear;
 
     @Override
@@ -29,8 +30,6 @@ public class CrearClienteActivity extends AppCompatActivity implements View.OnCl
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-        db = ClientesActivity.db;
 
         etNombre = (EditText) findViewById(R.id.etNombre);
         etTelefono = (EditText) findViewById(R.id.etTel);
@@ -52,10 +51,20 @@ public class CrearClienteActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        ContentValues insercion = new ContentValues();
-        insercion.put(BaseDeDatos.NOMBRE, etNombre.getText().toString());
-        insercion.put(BaseDeDatos.TELEFONO, etTelefono.getText().toString());
-        insercion.put(BaseDeDatos.UBICACION, etUbicacion.getText().toString());
-        db.insert(BaseDeDatos.CLIENTES_TABLA, null, insercion);
+        if (v.getId() == btnCrear.getId()) {
+            if (etTelefono.getText().toString().length() != 9) {
+                Toast.makeText(this, getString(R.string.error_telefono), Toast.LENGTH_SHORT).show();
+            } else {
+                ContentValues insercion = new ContentValues();
+
+                insercion.put(BaseDeDatos.NOMBRE, etNombre.getText().toString());
+                insercion.put(BaseDeDatos.TELEFONO, etTelefono.getText().toString());
+                insercion.put(BaseDeDatos.UBICACION, etUbicacion.getText().toString());
+
+                db.insert(BaseDeDatos.CLIENTES_TABLA, null, insercion);
+
+                Toast.makeText(this, getString(R.string.cliente_creado, etNombre.getText().toString()), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

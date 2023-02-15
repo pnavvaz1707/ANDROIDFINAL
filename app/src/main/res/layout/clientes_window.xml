@@ -7,6 +7,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnFiltrarCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginEnd="10dp"
+            android:text="@string/btn_filtrar_txt" />
+
+        <EditText
+            android:id="@+id/etFiltrarTel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginBottom="25dp"
+            android:hint="@string/cabecera_telefono_txt"
+            android:inputType="phone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -18,36 +40,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:text="ID"
+                android:text="@string/cabecera_id_txt"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Nombre"
+                android:text="@string/cabecera_nombre_txt"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Telefono"
+                android:text="@string/cabecera_telefono_txt"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
-                android:text="Ubicacion"
+                android:text="@string/cabecera_ubicacion_txt"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <ListView
             android:id="@+id/lstClientes"
             android:layout_width="match_parent"
-            android:layout_height="600dp" />
+            android:layout_height="550dp" />
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,7 +81,7 @@
             android:id="@+id/btnActualizarClientes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:text="@string/btn_actualizar_txt" />
 
         <Space

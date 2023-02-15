@@ -1,7 +1,10 @@
 package com.example.androidfinal;
 
+import static com.example.androidfinal.InicioActivity.db;
+
 import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,11 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CrearPedidoActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private SQLiteDatabase db;
     private Spinner spinnerPizzas;
     private EditText etIdClientePedido;
     private EditText etCantidadPizza;
-    private Button btnCancelar;
     private Button btnCrear;
 
     @Override
@@ -32,16 +34,15 @@ public class CrearPedidoActivity extends AppCompatActivity implements View.OnCli
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        db = ClientesActivity.db;
-
         spinnerPizzas = (Spinner) findViewById(R.id.spinnerPizzas);
         etIdClientePedido = (EditText) findViewById(R.id.etIdClientePedido);
         etCantidadPizza = (EditText) findViewById(R.id.etCantidadPizza);
-        btnCrear = (Button) findViewById(R.id.btnCrearClienteOk);
+        btnCrear = (Button) findViewById(R.id.btnCrearPedidoOk);
 
         btnCrear.setOnClickListener(this);
 
-        spinnerPizzas.setAdapter(new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, TiposPizza.values()));
+        String[] pizzas = getResources().getStringArray(R.array.pizzas);
+        spinnerPizzas.setAdapter(new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, pizzas));
     }
 
     @Override
@@ -56,27 +57,32 @@ public class CrearPedidoActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onClick(View v) {
-        ContentValues insercion = new ContentValues();
+        if (v.getId() == btnCrear.getId()) {
+            if (etIdClientePedido.getText().toString().isEmpty() || etCantidadPizza.getText().toString().isEmpty()) {
+                Toast.makeText(this, getString(R.string.error_campos_vacio), Toast.LENGTH_SHORT).show();
+            } else {
+                if (Integer.parseInt(etCantidadPizza.getText().toString()) == 0) {
+                    Toast.makeText(this, getString(R.string.error_0_pizzas), Toast.LENGTH_SHORT).show();
+                } else {
+                    Cursor c = db.rawQuery("SELECT " + BaseDeDatos.CLIENTE_ID + " FROM " + BaseDeDatos.CLIENTES_TABLA + " WHERE " + BaseDeDatos.CLIENTE_ID + " = " + Integer.parseInt(etIdClientePedido.getText().toString()), null);
+                    if (c.moveToNext()) {
+                        ContentValues insercion = new ContentValues();
 
-        TiposPizza pizzaSel = TiposPizza.valueOf(spinnerPizzas.getSelectedItem().toString());
-        /*for (TiposPizza pizza : TiposPizza.values()) {
-            if (spinnerPizzas.getSelectedItem().toString().equals(pizza.name())) {
-                nombrePizza = pizza.name();
-                precioPizza = pizza.getPrecio();
+                        insercion.put(BaseDeDatos.PIZZA, spinnerPizzas.getSelectedItem().toString());
+                        insercion.put(BaseDeDatos.CANTIDAD, Integer.parseInt(etCantidadPizza.getText().toString()));
+                        insercion.put(BaseDeDatos.PRECIO, 10);
+                        insercion.put(BaseDeDatos.ENTREGADA, 0);
+                        insercion.put(BaseDeDatos.PEDIDOS_CLIENTE_ID, Integer.parseInt(etIdClientePedido.getText().toString()));
+
+                        db.insert(BaseDeDatos.PEDIDOS_TABLA, null, insercion);
+
+                        Toast.makeText(this, getString(R.string.pedido_creado, spinnerPizzas.getSelectedItem().toString()), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, getString(R.string.cliente_no_existe), Toast.LENGTH_SHORT).show();
+                    }
+                    c.close();
+                }
             }
-        }*/
-
-        insercion.put(BaseDeDatos.PIZZA, pizzaSel.name());
-        insercion.put(BaseDeDatos.PRECIO, pizzaSel.getPrecio());
-        insercion.put(BaseDeDatos.CANTIDAD, Integer.parseInt(etCantidadPizza.getText().toString()));
-        insercion.put(BaseDeDatos.PEDIDOS_CLIENTE_ID, Integer.parseInt(etIdClientePedido.getText().toString()));
-
-        System.out.println("PizzaSP --> " + spinnerPizzas.getSelectedItem().toString());
-        System.out.println("Pizza --> " + insercion.get(BaseDeDatos.PIZZA));
-        System.out.println("Precio --> " + insercion.get(BaseDeDatos.PRECIO));
-        System.out.println("Cantidad --> " + insercion.get(BaseDeDatos.CANTIDAD));
-        System.out.println("Id cliente --> " + insercion.get(BaseDeDatos.PEDIDOS_CLIENTE_ID));
-
-        db.insert(BaseDeDatos.PEDIDOS_TABLA, null, insercion);
+        }
     }
 }

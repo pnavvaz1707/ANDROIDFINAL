@@ -1,6 +1,7 @@
 package com.example.androidfinal;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
     private Button btnClientes;
     private Button btnPedidos;
+    public static SQLiteDatabase db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,27 +25,18 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
 
         btnClientes.setOnClickListener(this);
         btnPedidos.setOnClickListener(this);
-    }
 
+        BaseDeDatos baseDeDatos = new BaseDeDatos(this, getString(R.string.nombre_bd), null, 3);
+        db = baseDeDatos.getWritableDatabase();
+    }
 
 
     @Override
     public void onClick(View v) {
         if (v.getId() == btnClientes.getId()) {
-            /*
-            Button btn = (Button) view;
-            Intent i = new Intent(getApplicationContext(), VentanaManual.class);
-
-            Bundle bundle = new Bundle();
-            bundle.putString("Titulo", btn.getText().toString());
-            bundle.putInt("idTitulo", Integer.parseInt(btn.getTag().toString()));
-
-            i.putExtras(bundle);
-            startActivity(i);
-             */
-            startActivity(new Intent(this,ClientesActivity.class));
+            startActivity(new Intent(this, ClientesActivity.class));
         } else if (v.getId() == btnPedidos.getId()) {
-            startActivity(new Intent(this,PedidosActivity.class));
+            startActivity(new Intent(this, PedidosActivity.class));
         }
     }
 
