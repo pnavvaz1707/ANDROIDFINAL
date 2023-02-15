@@ -61,26 +61,33 @@ public class CrearPedidoActivity extends AppCompatActivity implements View.OnCli
             if (etIdClientePedido.getText().toString().isEmpty() || etCantidadPizza.getText().toString().isEmpty()) {
                 Toast.makeText(this, getString(R.string.error_campos_vacio), Toast.LENGTH_SHORT).show();
             } else {
-                if (Integer.parseInt(etCantidadPizza.getText().toString()) == 0) {
-                    Toast.makeText(this, getString(R.string.error_0_pizzas), Toast.LENGTH_SHORT).show();
-                } else {
-                    Cursor c = db.rawQuery("SELECT " + BaseDeDatos.CLIENTE_ID + " FROM " + BaseDeDatos.CLIENTES_TABLA + " WHERE " + BaseDeDatos.CLIENTE_ID + " = " + Integer.parseInt(etIdClientePedido.getText().toString()), null);
-                    if (c.moveToNext()) {
-                        ContentValues insercion = new ContentValues();
-
-                        insercion.put(BaseDeDatos.PIZZA, spinnerPizzas.getSelectedItem().toString());
-                        insercion.put(BaseDeDatos.CANTIDAD, Integer.parseInt(etCantidadPizza.getText().toString()));
-                        insercion.put(BaseDeDatos.PRECIO, 10);
-                        insercion.put(BaseDeDatos.ENTREGADA, 0);
-                        insercion.put(BaseDeDatos.PEDIDOS_CLIENTE_ID, Integer.parseInt(etIdClientePedido.getText().toString()));
-
-                        db.insert(BaseDeDatos.PEDIDOS_TABLA, null, insercion);
-
-                        Toast.makeText(this, getString(R.string.pedido_creado, spinnerPizzas.getSelectedItem().toString()), Toast.LENGTH_SHORT).show();
+                try {
+                    if (Integer.parseInt(etCantidadPizza.getText().toString()) == 0) {
+                        Toast.makeText(this, getString(R.string.error_0_pizzas), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(this, getString(R.string.cliente_no_existe), Toast.LENGTH_SHORT).show();
+                        Cursor c = db.rawQuery("SELECT " + BaseDeDatos.CLIENTE_ID + " FROM " + BaseDeDatos.CLIENTES_TABLA + " WHERE " + BaseDeDatos.CLIENTE_ID + " = " + Integer.parseInt(etIdClientePedido.getText().toString()), null);
+                        if (c.moveToNext()) {
+                            ContentValues insercion = new ContentValues();
+
+                            insercion.put(BaseDeDatos.PIZZA, spinnerPizzas.getSelectedItem().toString());
+                            insercion.put(BaseDeDatos.CANTIDAD, Integer.parseInt(etCantidadPizza.getText().toString()));
+                            insercion.put(BaseDeDatos.PRECIO, 10);
+                            insercion.put(BaseDeDatos.ENTREGADA, 0);
+                            insercion.put(BaseDeDatos.PEDIDOS_CLIENTE_ID, Integer.parseInt(etIdClientePedido.getText().toString()));
+
+                            db.insert(BaseDeDatos.PEDIDOS_TABLA, null, insercion);
+
+                            Toast.makeText(this, getString(R.string.pedido_creado, spinnerPizzas.getSelectedItem().toString()), Toast.LENGTH_SHORT).show();
+
+                            etIdClientePedido.setText("");
+                            etCantidadPizza.setText("");
+                        } else {
+                            Toast.makeText(this, getString(R.string.cliente_no_existe), Toast.LENGTH_SHORT).show();
+                        }
+                        c.close();
                     }
-                    c.close();
+                }catch (Exception e){
+                    Toast.makeText(this, getString(R.string.error_cantidad_pizzas), Toast.LENGTH_SHORT).show();
                 }
             }
         }

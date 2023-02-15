@@ -52,18 +52,25 @@ public class CrearClienteActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if (v.getId() == btnCrear.getId()) {
-            if (etTelefono.getText().toString().length() != 9) {
-                Toast.makeText(this, getString(R.string.error_telefono), Toast.LENGTH_SHORT).show();
+            if (etNombre.getText().toString().trim().isEmpty() || etTelefono.getText().toString().trim().isEmpty() || etUbicacion.getText().toString().trim().isEmpty()) {
+                Toast.makeText(this, getString(R.string.error_campos_vacio), Toast.LENGTH_SHORT).show();
             } else {
-                ContentValues insercion = new ContentValues();
+                if (etTelefono.getText().toString().length() != 9) {
+                    Toast.makeText(this, getString(R.string.error_telefono), Toast.LENGTH_SHORT).show();
+                } else {
+                    ContentValues insercion = new ContentValues();
 
-                insercion.put(BaseDeDatos.NOMBRE, etNombre.getText().toString());
-                insercion.put(BaseDeDatos.TELEFONO, etTelefono.getText().toString());
-                insercion.put(BaseDeDatos.UBICACION, etUbicacion.getText().toString());
+                    insercion.put(BaseDeDatos.NOMBRE, etNombre.getText().toString());
+                    insercion.put(BaseDeDatos.TELEFONO, etTelefono.getText().toString());
+                    insercion.put(BaseDeDatos.UBICACION, etUbicacion.getText().toString());
 
-                db.insert(BaseDeDatos.CLIENTES_TABLA, null, insercion);
+                    db.insert(BaseDeDatos.CLIENTES_TABLA, null, insercion);
 
-                Toast.makeText(this, getString(R.string.cliente_creado, etNombre.getText().toString()), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.cliente_creado, etNombre.getText().toString()), Toast.LENGTH_SHORT).show();
+                    etNombre.setText("");
+                    etTelefono.setText("");
+                    etUbicacion.setText("");
+                }
             }
         }
     }

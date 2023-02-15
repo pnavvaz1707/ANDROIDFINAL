@@ -4,7 +4,6 @@
     <string name="btn_pedidos_txt">Pedidos</string>
     <string name="btn_crear_txt">Crear</string>
     <string name="btn_borrar_txt">Borrar</string>
-    <string name="btn_modificar_txt">Modificar</string>
     <string name="btn_listar_txt">Listar pedidos</string>
     <string name="btn_cancelar_txt">Cancelar</string>
     <string name="txt_ubicacion">Ubicación:</string>
@@ -40,6 +39,8 @@
     <string name="cabecera_cantidad_txt">Cantidad</string>
     <string name="cabecera_precio_txt">Precio</string>
     <string name="cabecera_entregada_txt">Entregada</string>
+    <string name="hilo_temp_txt">Ha pasado 1 minuto</string>
+    <string name="error_cantidad_pizzas">Ha habido un error con la cantidad de pizzas, probablemente es muy alto</string>
     <string-array name="pizzas">
         <item>Carbonara</item>
         <item>Prosciutto</item>
