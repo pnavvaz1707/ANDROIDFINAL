@@ -45,7 +45,8 @@ public class CustomAdaptadorClientes extends SimpleCursorAdapter implements View
 
         if (view.getId() == btnEliminarCliente.getId()) {
             if (db.delete(BaseDeDatos.CLIENTES_TABLA, BaseDeDatos.CLIENTE_ID + " = '" + tvId.getText().toString() + "'", null) > 0) {
-                Toast.makeText(CONTEXTO, CONTEXTO.getString(R.string.cliente_eliminado, tvNombre.getText().toString()), Toast.LENGTH_SHORT).show();
+                int numPedidosBorrados = db.delete(BaseDeDatos.PEDIDOS_TABLA, BaseDeDatos.PEDIDOS_CLIENTE_ID + " = '" + tvId.getText().toString() + "'", null);
+                Toast.makeText(CONTEXTO, CONTEXTO.getString(R.string.cliente_eliminado, tvNombre.getText().toString(),numPedidosBorrados), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(CONTEXTO, CONTEXTO.getString(R.string.cliente_no_eliminado, tvNombre.getText().toString()), Toast.LENGTH_SHORT).show();
             }

@@ -14,7 +14,7 @@
     <string name="nombre_bd" translatable="false">BDPizzeria</string>
     <string name="pedido_eliminado">Se ha eliminado el pedido %1$s</string>
     <string name="pedido_no_eliminado">No se ha eliminado el pedido %1$s</string>
-    <string name="cliente_eliminado">Se ha eliminado el cliente %1$s</string>
+    <string name="cliente_eliminado">Se ha eliminado el cliente %1$s y sus pedidos (%2$d)</string>
     <string name="cliente_no_eliminado">No se ha eliminado el cliente %1$s</string>
     <string name="pedidos_cliente">Pedidos del cliente %1$s</string>
     <string name="total_precio">Total gastado por %1$s : %2$s €</string>
