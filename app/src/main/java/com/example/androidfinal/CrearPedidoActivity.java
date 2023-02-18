@@ -26,6 +26,10 @@ public class CrearPedidoActivity extends AppCompatActivity implements View.OnCli
     private EditText etCantidadPizza;
     private Button btnCrear;
 
+    /**
+     * Método que se ejecuta al iniciar la activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,11 @@ public class CrearPedidoActivity extends AppCompatActivity implements View.OnCli
         spinnerPizzas.setAdapter(new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, pizzas));
     }
 
+    /**
+     * Método para asignarle una función de volver hacia atrás a la flecha de arriba izquierda
+     * @param item (Flecha)
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -55,8 +64,13 @@ public class CrearPedidoActivity extends AppCompatActivity implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Método que se ejecuta al hacer click en un botón
+     * @param v (Botón pulsado)
+     */
     @Override
     public void onClick(View v) {
+        //Si es el botón crear, comprobamos que los datos estén bien introducidos y creamos el pedido en la base de datos
         if (v.getId() == btnCrear.getId()) {
             if (etIdClientePedido.getText().toString().isEmpty() || etCantidadPizza.getText().toString().isEmpty()) {
                 Toast.makeText(this, getString(R.string.error_campos_vacio), Toast.LENGTH_SHORT).show();

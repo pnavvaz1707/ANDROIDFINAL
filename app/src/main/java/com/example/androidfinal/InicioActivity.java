@@ -18,6 +18,11 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
     private Button btnPedidos;
     public static SQLiteDatabase db;
 
+    /**
+     * Método que se ejecuta al iniciar la activity
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,22 +37,31 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         BaseDeDatos baseDeDatos = new BaseDeDatos(this, getString(R.string.nombre_bd), null, 3);
         db = baseDeDatos.getWritableDatabase();
 
+        //Hilo que avisa cada minuto que ya ha pasado un minuto
         final Handler handler = new Handler();
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(InicioActivity.this, R.string.hilo_temp_txt, Toast.LENGTH_SHORT).show();
-                handler.postDelayed(this, 60*1000); // 5 minutos
+                handler.postDelayed(this, 60 * 1000); // 1 minutos
             }
         };
-        handler.postDelayed(runnable, 60*1000); // 5 minutos
+        handler.postDelayed(runnable, 60 * 1000); // 1 minutos
     }
 
+    /**
+     * Método que se ejecuta al hacer click en un botón
+     *
+     * @param v (Botón pulsado)
+     */
     @Override
     public void onClick(View v) {
+        //Si es el botón clientes iniciamos la actividad de clientes
         if (v.getId() == btnClientes.getId()) {
             startActivity(new Intent(this, ClientesActivity.class));
-        } else if (v.getId() == btnPedidos.getId()) {
+
+        }//Si es el botón pedidos iniciamos la actividad de pedidos
+        else if (v.getId() == btnPedidos.getId()) {
             startActivity(new Intent(this, PedidosActivity.class));
         }
     }

@@ -23,6 +23,13 @@ public class CustomAdaptadorPedidos extends SimpleCursorAdapter implements View.
         this.CONTEXTO = context;
     }
 
+    /**
+     * Método que se ejecuta cada vez que se recibe un dato en el list view
+     * @param position (Posición del dato)
+     * @param convertView (Vista del dato recibido)
+     * @param parent (Vista padre del list view)
+     * @return Devuelve la vista que guarda el dato recibido
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
@@ -46,6 +53,10 @@ public class CustomAdaptadorPedidos extends SimpleCursorAdapter implements View.
         return view;
     }
 
+    /**
+     * Método que se ejecuta al hacer click en un botón
+     * @param view (Botón pulsado)
+     */
     @Override
     public void onClick(View view) {
         LinearLayout layout = (LinearLayout) view.getParent();
@@ -53,14 +64,15 @@ public class CustomAdaptadorPedidos extends SimpleCursorAdapter implements View.
         TextView tvIdPedido = (TextView) layout.findViewById(R.id.tvIdPedido);
         TextView tvNombrePizza = (TextView) layout.findViewById(R.id.tvNombrePizza);
 
-
+        //Si es el botón de eliminar pedidos, eliminamos el pedido de la base de datos
         if (view.getId() == btnEliminarPedido.getId()) {
             if (db.delete(BaseDeDatos.PEDIDOS_TABLA, BaseDeDatos.PEDIDO_ID + " = '" + tvIdPedido.getText().toString() + "'", null) > 0) {
                 Toast.makeText(CONTEXTO, CONTEXTO.getString(R.string.pedido_eliminado, tvNombrePizza.getText().toString()), Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(CONTEXTO, CONTEXTO.getString(R.string.pedido_no_eliminado, tvNombrePizza.getText().toString()), Toast.LENGTH_SHORT).show();
             }
-        } else if (view.getId() == checkEntregada.getId()) {
+        }//Si es el checkbox de pedido entregado, modificamos el campo entregada de la base de datos a 1 (si está entregada) o a 0 (si no lo está)
+        else if (view.getId() == checkEntregada.getId()) {
             checkEntregada = (CheckBox) layout.findViewById(R.id.chckEntregada);
             if (checkEntregada.isChecked()) {
                 db.execSQL("UPDATE " + BaseDeDatos.PEDIDOS_TABLA + " SET " + BaseDeDatos.ENTREGADA + " = 1 WHERE " + BaseDeDatos.PEDIDO_ID + " = " + Integer.parseInt(tvIdPedido.getText().toString()));

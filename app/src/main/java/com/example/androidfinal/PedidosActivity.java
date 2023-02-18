@@ -22,6 +22,10 @@ public class PedidosActivity extends AppCompatActivity implements View.OnClickLi
     private Button btnActualizar;
     private ListView lstPedidos;
 
+    /**
+     * Método que se ejecuta al iniciar la activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,11 @@ public class PedidosActivity extends AppCompatActivity implements View.OnClickLi
         actualizar();
     }
 
+    /**
+     * Método para asignarle una función de volver hacia atrás a la flecha de arriba izquierda
+     * @param item (Flecha)
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -51,16 +60,25 @@ public class PedidosActivity extends AppCompatActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Método que se ejecuta al hacer click en un botón
+     * @param v (Botón pulsado)
+     */
     @Override
     public void onClick(View v) {
+        //Si es el botón crear iniciamos la actividad de crear pedido
         if (v.getId() == btnCrear.getId()) {
             startActivity(new Intent(this, CrearPedidoActivity.class));
 
-        } else if (v.getId() == btnActualizar.getId()) {
+        }//Si es el botón actualizar actualizamos los datos del list view
+        else if (v.getId() == btnActualizar.getId()) {
             actualizar();
         }
     }
 
+    /**
+     * Método para actualizar los datos del listview
+     */
     private void actualizar() {
         Cursor c1 = db.rawQuery("SELECT * FROM " + BaseDeDatos.PEDIDOS_TABLA, null);
 

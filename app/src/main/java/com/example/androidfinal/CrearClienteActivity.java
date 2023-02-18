@@ -23,6 +23,10 @@ public class CrearClienteActivity extends AppCompatActivity implements View.OnCl
     private EditText etUbicacion;
     private Button btnCrear;
 
+    /**
+     * Método que se ejecuta al iniciar la activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,11 @@ public class CrearClienteActivity extends AppCompatActivity implements View.OnCl
         btnCrear.setOnClickListener(this);
     }
 
+    /**
+     * Método para asignarle una función de volver hacia atrás a la flecha de arriba izquierda
+     * @param item (Flecha)
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -49,8 +58,13 @@ public class CrearClienteActivity extends AppCompatActivity implements View.OnCl
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Método que se ejecuta al hacer click en un botón
+     * @param v (Botón pulsado)
+     */
     @Override
     public void onClick(View v) {
+        //Si es el botón crear, comprobamos que los datos estén bien introducidos y creamos el cliente en la base de datos
         if (v.getId() == btnCrear.getId()) {
             if (etNombre.getText().toString().trim().isEmpty() || etTelefono.getText().toString().trim().isEmpty() || etUbicacion.getText().toString().trim().isEmpty()) {
                 Toast.makeText(this, getString(R.string.error_campos_vacio), Toast.LENGTH_SHORT).show();

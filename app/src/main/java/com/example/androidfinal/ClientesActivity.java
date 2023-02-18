@@ -25,6 +25,10 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
     private EditText etFiltrarTel;
     private ListView lstClientes;
 
+    /**
+     * Método que se ejecuta al iniciar la activity
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,11 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
         mostrarDatos("SELECT * FROM " + BaseDeDatos.CLIENTES_TABLA);
     }
 
+    /**
+     * Método para asignarle una función de volver hacia atrás a la flecha de arriba izquierda
+     * @param item (Flecha)
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -57,16 +66,25 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Método que se ejecuta al hacer click en un botón
+     * @param v (Botón pulsado)
+     */
     @Override
     public void onClick(View v) {
+        //Si es el botón crear iniciamos la actividad de crear cliente
         if (v.getId() == btnCrear.getId()) {
             startActivity(new Intent(this, CrearClienteActivity.class));
 
-        } else if (v.getId() == btnActualizar.getId()) {
+        }
+        //Si es el botón actualizar actualizamos los datos del list view
+        else if (v.getId() == btnActualizar.getId()) {
             mostrarDatos("SELECT * FROM " + BaseDeDatos.CLIENTES_TABLA);
             Toast.makeText(this, getString(R.string.lista_clientes_actualizada), Toast.LENGTH_SHORT).show();
 
-        } else if (v.getId() == btnFiltrar.getId()) {
+        }
+        //Si es el botón filtrar, filtramos los datos del listview por el campo teléfono con el teléfono introducido en el edit text (etFiltrarTel)
+        else if (v.getId() == btnFiltrar.getId()) {
             if (etFiltrarTel.getText().toString().length() == 9 && !etFiltrarTel.getText().toString().isEmpty()) {
 
                 mostrarDatos("SELECT * FROM " + BaseDeDatos.CLIENTES_TABLA + " WHERE " + BaseDeDatos.TELEFONO + " = " + etFiltrarTel.getText().toString());
@@ -78,6 +96,10 @@ public class ClientesActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * Método para mostrar los datos obtenidos de una sentencia de la base de datos en el list view principal
+     * @param sentencia (Sentencia de búsqueda de datos en la base de datos)
+     */
     private void mostrarDatos(String sentencia) {
         Cursor c1 = db.rawQuery(sentencia, null);
 

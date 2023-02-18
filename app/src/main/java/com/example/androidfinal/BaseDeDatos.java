@@ -41,12 +41,15 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     private static final String CLIENTES_TABLA_BORRAR = "DROP TABLE IF EXISTS " + CLIENTES_TABLA;
     private static final String PEDIDOS_TABLA_BORRAR = "DROP TABLE IF EXISTS " + PEDIDOS_TABLA;
 
-    // Constructor de la clase. Podr�amos eliminar los par�metros
-    // menos el contexto
+
     public BaseDeDatos(Context contexto, String nombre, CursorFactory factory, int version) {
         super(contexto, nombre, factory, version);
     }
 
+    /**
+     * Método que se ejecuta al iniciar la base de datos
+     * @param db (Base de datos usada)
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         // Creamos la tabla por SQL. Podr�a ya existir la BD
@@ -54,6 +57,12 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         db.execSQL(PEDIDOS_TABLA_CREAR);
     }
 
+    /**
+     * Método para actualizar la base de datos si le cambiamos la versión
+     * @param db (Base de datos usada)
+     * @param oldVersion (Versión anterior)
+     * @param newVersion (Versión nueva
+     */
     @Override
     // S�lo se ejecuta si las versiones son distintas
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

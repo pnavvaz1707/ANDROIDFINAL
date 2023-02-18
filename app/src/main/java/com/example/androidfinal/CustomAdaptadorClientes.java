@@ -24,6 +24,13 @@ public class CustomAdaptadorClientes extends SimpleCursorAdapter implements View
         this.CONTEXTO = context;
     }
 
+    /**
+     * Método que se ejecuta cada vez que se recibe un dato en el list view
+     * @param position (Posición del dato)
+     * @param convertView (Vista del dato recibido)
+     * @param parent (Vista padre del list view)
+     * @return Devuelve la vista que guarda el dato recibido
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
@@ -36,6 +43,10 @@ public class CustomAdaptadorClientes extends SimpleCursorAdapter implements View
         return view;
     }
 
+    /**
+     * Método que se ejecuta al hacer click en un botón
+     * @param view (Botón pulsado)
+     */
     @Override
     public void onClick(View view) {
         LinearLayout layout = (LinearLayout) view.getParent();
@@ -43,6 +54,7 @@ public class CustomAdaptadorClientes extends SimpleCursorAdapter implements View
         TextView tvId = (TextView) layout.findViewById(R.id.tvId);
         TextView tvNombre = (TextView) layout.findViewById(R.id.tvNombre);
 
+        //Si es el botón de eliminar clientes, eliminamos el cliente y los pedidos relacionados a él de la base de datos
         if (view.getId() == btnEliminarCliente.getId()) {
             if (db.delete(BaseDeDatos.CLIENTES_TABLA, BaseDeDatos.CLIENTE_ID + " = '" + tvId.getText().toString() + "'", null) > 0) {
                 int numPedidosBorrados = db.delete(BaseDeDatos.PEDIDOS_TABLA, BaseDeDatos.PEDIDOS_CLIENTE_ID + " = '" + tvId.getText().toString() + "'", null);
@@ -51,7 +63,8 @@ public class CustomAdaptadorClientes extends SimpleCursorAdapter implements View
                 Toast.makeText(CONTEXTO, CONTEXTO.getString(R.string.cliente_no_eliminado, tvNombre.getText().toString()), Toast.LENGTH_SHORT).show();
             }
 
-        } else if (view.getId() == btnVerPedidos.getId()) {
+        }//Si es el botón de ver pedidos del cliente, buscamos los pedidos relacionados al cliente seleccionado de la base de datos y los mostramos
+        else if (view.getId() == btnVerPedidos.getId()) {
             Dialog dialog = new Dialog(CONTEXTO);
             dialog.setContentView(R.layout.pedidos_cliente);
 
@@ -65,6 +78,7 @@ public class CustomAdaptadorClientes extends SimpleCursorAdapter implements View
             String[] nombresColumnas = new String[]{BaseDeDatos.PEDIDO_ID, BaseDeDatos.PIZZA, BaseDeDatos.PRECIO, BaseDeDatos.CANTIDAD};
             int[] referencias = new int[]{R.id.tvIdPedido, R.id.tvNombrePizza, R.id.tvPrecioPizza, R.id.tvCantidadPizza};
 
+            //Buscamos en la base de datos los campos indicados en el array nombreColumnas y los volcamos en las vistas indicadas en el array referencias
             CustomAdaptadorPedidos adaptador = new CustomAdaptadorPedidos(CONTEXTO, R.layout.list_pedidos, pedidosCliente, nombresColumnas, referencias, 0);
             lstPedidos.setAdapter(adaptador);
 
