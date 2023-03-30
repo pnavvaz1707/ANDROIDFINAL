@@ -34,7 +34,7 @@ public class InicioActivity extends AppCompatActivity implements View.OnClickLis
         btnClientes.setOnClickListener(this);
         btnPedidos.setOnClickListener(this);
 
-        BaseDeDatos baseDeDatos = new BaseDeDatos(this, getString(R.string.nombre_bd), null, 3);
+        BaseDeDatos baseDeDatos = new BaseDeDatos(this, getString(R.string.nombre_bd), null, 4);
         db = baseDeDatos.getWritableDatabase();
 
         //Hilo que avisa cada minuto que ya ha pasado un minuto
